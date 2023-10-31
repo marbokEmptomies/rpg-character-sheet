@@ -33,15 +33,19 @@ function CharacterList({newCharacterSaved, onDataLoad}) {
   return (
     <div>
         <h1>List of characters</h1>
-        <div className="character-list">
-          {characters.map((character) => (
-            <CharacterCard 
-              key={character.id} 
-              character={character} 
-              onDeleteCharacter={handleDeleteCharacter} 
-            />
-          ))}
-        </div>
+        {characters.length > 0 ? (
+          <div className="character-list">
+            {characters.map((character) => (
+              <CharacterCard 
+                key={character.id} 
+                character={character} 
+                onDeleteCharacter={handleDeleteCharacter} 
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No characters found.</p>
+        )}
     </div>
   );
 }
