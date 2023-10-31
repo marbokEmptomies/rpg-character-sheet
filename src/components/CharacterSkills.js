@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCharacterSkills } from './apiService';
+import "../CharacterCard.css"
 
 function CharacterSkills({characterId}) {
     const [skills, setSkills] = useState([]);
@@ -18,7 +19,7 @@ function CharacterSkills({characterId}) {
 
     return (
         <div>
-            <h2>Character skills</h2>
+            <h3>Skills:</h3>
             <ul>
                 {skills.map((skill, index) => (
                     <li key={index}>

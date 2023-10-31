@@ -42,13 +42,14 @@ function CharacterCreation() {
     Charisma: 0,
     Barter: 0,
   });
+  const [newCharacterSaved, setNewCharacterSaved] = useState(false);
 
   const handleSaveCharacter = () => {
     // Create an array of skill objects
     const skillsArray = Object.keys(skills).map((skillName) => ({
       skill_name: skillName,
-      skill_value: skills[skillName]
-    }))
+      skill_value: skills[skillName],
+    }));
     const characterData = {
       charactername: characterName,
       race: selectedRace,
@@ -60,10 +61,15 @@ function CharacterCreation() {
     saveCharacter(characterData)
       .then((response) => {
         console.log("Character saved: ", response.data);
+        setNewCharacterSaved(true);
       })
       .catch((error) => {
         console.error("Error saving character: ", error);
       });
+  };
+
+  const handleCharacterListDataLoad = () => {
+    setNewCharacterSaved(false);
   };
 
   const handleCharacterNameChange = (e) => {
@@ -109,7 +115,10 @@ function CharacterCreation() {
 
   return (
     <div>
-      <CharacterList />
+      <CharacterList
+        newCharacterSaved={newCharacterSaved}
+        onDataLoad={handleCharacterListDataLoad}
+      />
       <h1>Character Creation </h1>
       <label htmlFor="characterName">Name:</label>
       <input
