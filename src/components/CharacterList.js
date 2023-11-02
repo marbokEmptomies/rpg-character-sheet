@@ -3,25 +3,38 @@ import { getCharacters, deleteCharacter} from "./apiService";
 import CharacterCard from "./CharacterCard";
 import "../CharacterList.css"
 
-function CharacterList({newCharacterSaved, onDataLoad}) {
-  const [characters, setCharacters] = useState([]);
+function CharacterList({isCharacterSaved}) {
+  const [characterData, setCharacterData] = useState([]);
 
   useEffect(() => {
     getCharacters()
       .then((response) => {
-        setCharacters(response.data);
-        onDataLoad();
+        setCharacterData(response.data);
+        /* onDataLoad(); */
       })
       .catch((error) => {
         console.error("Error fetching character data: ", error);
       });
-  }, [newCharacterSaved, onDataLoad]);
+  }, []);
+
+  useEffect(() => {
+    if (isCharacterSaved) {
+      //Fetch characters when a new character is saved
+      getCharacters()
+        .then((response) => {
+          setCharacterData(response.data)
+        })
+        .catch((error) => {
+          console.error("Error fetching character data: ", error)
+        });
+    }
+  }, [isCharacterSaved])
 
   const handleDeleteCharacter = (characterId) => {
     deleteCharacter(characterId)
     .then((response) => {
       console.log("Character deleted: ", response.data);
-      setCharacters((prevCharacters) => 
+      setCharacterData((prevCharacters) => 
         prevCharacters.filter((char) => char.id !== characterId)
       );
     })
@@ -33,9 +46,9 @@ function CharacterList({newCharacterSaved, onDataLoad}) {
   return (
     <div>
         <h1>List of characters</h1>
-        {characters.length > 0 ? (
+        {characterData.length > 0 ? (
           <div className="character-list">
-            {characters.map((character) => (
+            {characterData.map((character) => (
               <CharacterCard 
                 key={character.id} 
                 character={character} 
