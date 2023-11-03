@@ -138,7 +138,6 @@ function CharacterCreation() {
 
   return (
     <div>
-      <CharacterList characters={characterList} isCharacterSaved={isCharacterSaved} />
       <h1>Character Creation </h1>
       <label htmlFor="characterName">Name:</label>
       <input
@@ -226,6 +225,7 @@ function CharacterCreation() {
         backgroundStory={character.backgroundStory}
         generateNewBackgroundStory={generateNewBackgroundStory}
       />
+      <CharacterList characters={characterList} isCharacterSaved={isCharacterSaved} />
     </div>
   );
 }

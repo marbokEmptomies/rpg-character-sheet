@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCharacters, deleteCharacter} from "./apiService";
 import CharacterCard from "./CharacterCard";
-import "../CharacterList.css"
+import styles from "../CharacterList.module.css";
 
 function CharacterList({isCharacterSaved}) {
   const [characterData, setCharacterData] = useState([]);
@@ -47,7 +47,7 @@ function CharacterList({isCharacterSaved}) {
     <div>
         <h1>List of characters</h1>
         {characterData.length > 0 ? (
-          <div className="character-list">
+          <div className={styles["character-list"]}>
             {characterData.map((character) => (
               <CharacterCard 
                 key={character.id} 

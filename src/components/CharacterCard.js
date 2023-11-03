@@ -1,6 +1,6 @@
 import React from "react";
 import CharacterSkills from "./CharacterSkills";
-import "../CharacterCard.css";
+import styles from "../CharacterCard.module.css";
 
 function CharacterCard({ character, onDeleteCharacter }) {
     const handleDeleteClick = () => {
@@ -8,16 +8,15 @@ function CharacterCard({ character, onDeleteCharacter }) {
     };
 
   return (
-    <div className="character-card">
-      <div className="character-info">
-        <h3>General stats:</h3>
-        <p>Name: {character.charactername}</p>
-        <p>Race: {character.race}</p>
-        <p>Class: {character.charclass}</p>
-        <p>Gender: {character.chargender}</p>
+    <div className={styles["character-card"]}>
+      <div className={styles["character-details"]}>
+        <h3>{character.charactername}</h3>
+        Race: {character.race}<br />
+        Class: {character.charclass}<br />
+        Gender: {character.chargender}<br />
       </div>
       <CharacterSkills characterId={character.id} />
-      <button onClick={handleDeleteClick}>Delete character</button>
+      <button className={styles["delete-button"]} onClick={handleDeleteClick}>Delete character</button>
     </div>
   );
 }
