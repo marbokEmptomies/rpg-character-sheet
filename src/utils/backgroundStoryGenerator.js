@@ -1,4 +1,4 @@
-export function generateRandomBackgroundStory(character, selectedRace, selectedClass, selectedGender){
+export function generateRandomBackgroundStory(character, selectedRace, selectedClass){
     console.log(character, selectedClass, selectedRace)
     const { characterName } = character;
     // Define background story templates based on race and class
